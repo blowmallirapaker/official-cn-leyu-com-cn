@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blowmallirapaker.github.io/official-cn-leyu-com-cn/sitemap.xml
