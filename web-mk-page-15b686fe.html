@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MK体育 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #f5f7fc;
+      line-height: 1.6;
+      color: #1e1f28;
+    }
+
+    /* 深色头图 */
+    .hero {
+      background: linear-gradient(145deg, #0b0c10 0%, #1b1e2a 100%);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -20%;
+      width: 140%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: #f2f4f8;
+      margin-bottom: 0.6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      color: #b7bccc;
+      max-width: 680px;
+      margin: 0 auto 0.25rem;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      color: #f5d742;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.25rem 1.1rem;
+      border-radius: 30px;
+      margin-top: 0.8rem;
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 浅色正文区 */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* 目录感布局 — 网格卡片 */
+    .grid-intro {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.6rem 1.4rem 1.8rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.2s;
+    }
+
+    .info-card:hover {
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+    }
+
+    .info-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #0b0c10;
+    }
+
+    .info-card p {
+      font-size: 0.94rem;
+      color: #3f4456;
+    }
+
+    /* 说明区 */
+    .explain-section {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 2rem 2.2rem;
+      margin: 2.8rem 0 2.2rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+    }
+
+    .explain-section h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      border-left: 4px solid #f5d742;
+      padding-left: 0.9rem;
+      margin-bottom: 1.2rem;
+      color: #12141f;
+    }
+
+    .explain-section p {
+      margin-bottom: 1rem;
+      color: #2d3140;
+    }
+
+    .explain-section a {
+      color: #c8951a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(200, 149, 26, 0.3);
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .explain-section a:hover {
+      color: #a87c12;
+      border-bottom-color: #a87c12;
+    }
+
+    /* 提示区 + 相关信息区 (并排) */
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .info-panel {
+      flex: 1 1 220px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.6rem 1.5rem 2rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .info-panel h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      color: #0b0c10;
+    }
+
+    .info-panel ul, .info-panel p {
+      font-size: 0.95rem;
+      color: #2f3446;
+      list-style: none;
+    }
+
+    .info-panel li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+
+    .info-panel li:last-child {
+      border-bottom: none;
+    }
+
+    .faq-summary {
+      margin-top: 2.6rem;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 2rem 2rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+    }
+
+    .faq-summary h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #12141f;
+    }
+
+    .faq-item {
+      margin-bottom: 0.6rem;
+    }
+
+    .faq-item strong {
+      font-weight: 600;
+      color: #1b1e2a;
+      display: inline-block;
+      margin-right: 0.3rem;
+    }
+
+    .faq-item span {
+      color: #3b4055;
+    }
+
+    .footnote {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #5e647a;
+      text-align: center;
+      border-top: 1px solid #e6e9f0;
+      padding-top: 1.8rem;
+    }
+
+    /* 强调色链接 (正文中) */
+    .inline-link {
+      color: #c8951a;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200, 149, 26, 0.2);
+      transition: border-color 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #c8951a;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero {
+        padding: 3rem 1.2rem 2.5rem;
+      }
+      .container {
+        padding: 1.6rem 1rem 3rem;
+      }
+      .explain-section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <header class="hero">
+    <h1>MK体育 · 知识库</h1>
+    <p>快速识别网站用途 · 一站式信息索引</p>
+    <div class="badge">目录 · 说明 · 提示 · FAQ</div>
+  </header>
+
+  <!-- 浅色正文区 -->
+  <main class="container">
+
+    <!-- 卡片网格 — 目录感布局 -->
+    <div class="grid-intro">
+      <div class="info-card">
+        <div class="icon">📋</div>
+        <h3>站点定位</h3>
+        <p>围绕MK体育相关内容聚合的信息节点，提供体育资讯与平台引导。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">🗂️</div>
+        <h3>内容类型</h3>
+        <p>体育动态、规则科普、玩法说明、常见问题索引等结构化栏目。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">🔍</div>
+        <h3>查找效率</h3>
+        <p>分类入口清晰，减少逐页翻找成本，适合新用户快速了解方向。</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">🧭</div>
+        <h3>使用场景</h3>
+        <p>赛前浏览规则、赛后查阅数据、日常了解体育知识均可覆盖。</p>
+      </div>
+    </div>
+
+    <!-- 说明区（嵌入链接） -->
+    <section class="explain-section">
+      <h2>关于这个知识库</h2>
+      <p>很多用户第一次来到 <a href="https://web--mk.com" class="inline-link">MK体育</a> 时，会希望快速判断网站能提供什么。本站定位为一个轻量知识入口，将常见的体育概念、术语、常见问题以目录方式组织。</p>
+      <p>这里的每个卡片都对应一类信息：从站点概览到详细说明，再到提示与 FAQ 摘要。如果你已经在使用 <a href="https://web--mk.com" class="inline-link">MK体育</a>，这里的内容可以帮助你更快地查阅背景信息；如果你只是路过，也能在这里获得一些有价值的体育常识索引。</p>
+      <p>整个页面采用「深色头图 + 浅色内容」的视觉分区，让阅读重点更集中。</p>
+    </section>
+
+    <!-- 提示区 + 相关信息区 -->
+    <div class="info-row">
+      <!-- 提示区 -->
+      <div class="info-panel">
+        <h3>💡 提示</h3>
+        <ul>
+          <li>• 页面内容为知识整理，不构成任何操作建议。</li>
+          <li>• 浏览时留意各板块标题，快速定位需要的信息。</li>
+          <li>• 部分链接指向外部资源，请自行判断准确性。</li>
+          <li>• 如发现信息偏差，可反馈帮助完善。</li>
+        </ul>
+      </div>
+      <!-- 相关信息区 -->
+      <div class="info-panel">
+        <h3>📎 相关信息</h3>
+        <ul>
+          <li>• 体育项目基础术语</li>
+          <li>• 常见赛制与规则简读</li>
+          <li>• 数据统计常用指标</li>
+          <li>• 平台功能指引索引</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+      <h3>❓ 常见问题摘要</h3>
+      <div class="faq-item"><strong>Q：</strong><span>这个网站直接提供体育数据吗？ — 本站以知识目录为主，具体数据可参考相关板块链接。</span></div>
+      <div class="faq-item"><strong>Q：</strong><span>如何快速了解某项运动？ — 从「站点定位」卡片开始，依次浏览说明区和提示区。</span></div>
+      <div class="faq-item"><strong>Q：</strong><span>是否有更新计划？ — 知识库会按周期扩展，补充更多体育相关内容。</span></div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footnote">
+      知识库入口 · 以目录感方式呈现 MK体育 相关信息
+    </div>
+
+  </main>
+
+</body>
+</html>
